@@ -1,0 +1,50 @@
+.main {
+    display: flex;
+    min-height: 553px;
+    padding: 24px;
+    margin: 24px;
+    border-radius: 8px;
+    gap: 32px;
+    background: rgba(255, 255, 255, 1);
+}
+
+.img {
+    border-radius: 8px;
+    width: 400px;
+    height: 500px;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.part {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.titleBlock {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-family: Roboto, sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 32px;
+}
+
+.bold {
+    font-weight: 500;
+    margin-right: 8px;
+}

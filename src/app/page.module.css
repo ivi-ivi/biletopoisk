@@ -1,0 +1,74 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: scroll;
+    background: rgba(245, 245, 245, 1);
+}
+
+.header {
+    height: 84px;
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    background: rgba(51, 51, 51, 1);
+    display: flex;
+    padding: 24px 32px;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    color: rgba(255, 255, 255, 1);
+}
+
+.sectionMain {
+    padding: 24px 32px;
+    height: 100%;
+    display: flex;
+    gap: 24px;
+}
+
+.footer {
+    margin-top: auto;
+    margin-bottom: 0;
+    width: 100%;
+    height: 86px;
+    background: rgba(51, 51, 51, 1);
+    display: flex;
+    padding: 24px 32px;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(255, 255, 255, 1);
+}
+
+.logo {
+    font-family: Roboto, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 38px;
+    text-align: left;
+}
+
+.filmsList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.count {
+    background: rgba(255, 85, 0, 1);
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    border-radius: 8px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,51 @@
+.dropdown {
+    border: 1px solid #FFFFFF;
+    box-shadow: 0 10px 22px -4px rgba(27, 31, 35, 0.12);
+    position: absolute;
+    top: 324px;
+    left: 56px;
+    z-index: 10;
+    border-radius: 8px;
+    width: 360px;
+}
+
+.input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item {
+    width: 344px;
+    height: 42px;
+    padding: 12px;
+    border-radius: 8px;
+    gap: 8px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.button {
+    position: relative;
+    width: 360px;
+    height: 40px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(225, 227, 230, 1);
+    gap: 8px;
+    cursor: pointer;
+}
+
+.button::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgba(153, 159, 166, 1);
+    opacity: 1; /* Firefox */
+}
+
+.button:hover {
+    border-color: rgba(255, 85, 0, 1);
+}
+
+.button:focus {
+    outline: none !important;
+    border-color: rgba(255, 85, 0, 1);
+}
