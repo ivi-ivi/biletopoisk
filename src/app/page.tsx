@@ -19,11 +19,11 @@ export default function Home() {
   const [name, setName] = useState('');
   const [genre, setGenre] = useState('');
 
-  const { data, isLoading, error } = useGetMoviesQuery('movies');
+  const { data, isLoading, error } = useGetMoviesQuery();
   const [filtered, setFiltered] = useState<Film[]>();
   const [filteredName, setFilteredName] = useState<Film[]>();
   const [filteredGenre, setFilteredGenre] = useState<Film[]>();
-  let timeoutId: NodeJS.Timeout;
+  let timeoutId: NodeJS.Timeout | undefined;
 
   useEffect(() => {
     setFilteredName(data);
@@ -59,9 +59,9 @@ export default function Home() {
     } else setFilteredGenre(data);
   }, [genre]);
 
-  function debounce<T extends (...args: any[]) => void>(func: T, delay: number): (...args: Array<T>) => void {
+  function debounce(func: any, delay: number) {
 
-    return function debouncedFn(this: any, ...args: Array<T>): void {
+    return function debouncedFn(...args: any): void {
       clearTimeout(timeoutId);
 
       timeoutId = setTimeout(() => {
@@ -69,7 +69,6 @@ export default function Home() {
       }, delay);
     };
   }
-
 
   if (isLoading) {
     return <Spinner />;

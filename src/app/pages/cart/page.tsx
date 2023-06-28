@@ -14,7 +14,7 @@ import { Film } from '../../page';
 
 export default function Cart() {
   const amount = useSelector((state: any) => state.cart);
-  const { data, isLoading, error } = useGetMoviesQuery('movies');
+  const { data, isLoading, error } = useGetMoviesQuery();
   const [open, setOpen] = useState<string | null>(null);
   const dispatch = useDispatch();
 
