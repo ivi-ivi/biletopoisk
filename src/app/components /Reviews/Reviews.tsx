@@ -4,7 +4,13 @@ import { Review } from './Review';
 import { useGetReviewQuery } from '../../store/servises/reviewsApi';
 import { Spinner } from '../Spinner/Spinner';
 
-export const Reviews = ({ id }) => {
+interface ReviewProps {
+  rating: number;
+  text: string;
+  name: string
+}
+
+export const Reviews = ({ id }: { id: string }) => {
   const { data, isLoading, error } = useGetReviewQuery(id);
 
   if (isLoading) {
@@ -17,8 +23,8 @@ export const Reviews = ({ id }) => {
 
   return (
     <div>
-      {data.map((child) => (
-        <Review key={child} rating={child.rating} text={child.text} name={child.name} />
+      {data.map((child: ReviewProps) => (
+        <Review key={child.text} rating={child.rating} text={child.text} name={child.name} />
       ))}
     </div>
   );

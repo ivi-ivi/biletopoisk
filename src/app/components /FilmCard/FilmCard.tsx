@@ -1,13 +1,14 @@
 import styles from './card.module.css';
 import { Counter } from '../Counter/Counter';
 import Link from 'next/link';
+import { ReactNode } from 'react';
 
 interface Props {
   title: string;
   genre: string;
   posterUrl: string;
   id: string;
-  renderDeleteButton?: () => HTMLButtonElement;
+  renderDeleteButton?: () => ReactNode;
   inCart?: boolean;
 }
 

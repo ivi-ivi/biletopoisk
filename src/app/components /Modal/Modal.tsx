@@ -6,12 +6,12 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { CrossIcon } from '../../icons/CrossIcon';
 
-export const useOutsideClick = (initialValue) => {
+export const useOutsideClick = (initialValue: boolean) => {
   const [isActive, setIsActive] = useState(initialValue);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
-  const handleClick = (e) => {
-    if (ref.current && !ref.current.contains(e.target)) {
+  const handleClick = (e: MouseEvent) => {
+    if (ref.current !== null && !ref.current.contains(e.target as Node)) {
       setIsActive(!isActive);
     }
   };
@@ -36,13 +36,13 @@ export type ModalProps = {
 };
 
 export const Modal = ({
-  title,
-  children,
-  confirmAction,
-  cancelAction,
-  open,
-  closeModal,
-}: ModalProps) => {
+                        title,
+                        children,
+                        confirmAction,
+                        cancelAction,
+                        open,
+                        closeModal
+                      }: ModalProps) => {
   const { ref, isActive, setIsActive } = useOutsideClick(true);
   useEffect(() => {
     if (open) document.body.style.overflow = 'hidden';
@@ -62,41 +62,41 @@ export const Modal = ({
     <>
       {open && isActive
         ? createPortal(
-            <div className={classNames(styles.wrap)}>
-              <div
-                ref={ref}
-                onClick={(e) => e.stopPropagation()}
-                className={classNames(styles.modal)}
-              >
-                {title ? (
-                  <div className={styles.titleBlock}>
-                    <span className={classNames(styles.title)}>{title}</span>
-                    <button className={styles.buttonClose} onClick={closeModal}>
-                      <CrossIcon className={styles.icon} />
-                    </button>
-                  </div>
-                ) : null}
-                <div className={classNames(styles.content)}>{children}</div>
-                <div className={classNames(styles.buttonBlock)}>
-                  <button
-                    className={styles.buttonYes}
-                    onClick={() => {
-                      confirmAction();
-                      if (closeModal) {
-                        closeModal();
-                      }
-                    }}
-                  >
-                    Да
-                  </button>
-                  <button className={styles.buttonNo} onClick={cancelAction}>
-                    Нет
+          <div className={classNames(styles.wrap)}>
+            <div
+              ref={ref}
+              onClick={(e) => e.stopPropagation()}
+              className={classNames(styles.modal)}
+            >
+              {title ? (
+                <div className={styles.titleBlock}>
+                  <span className={classNames(styles.title)}>{title}</span>
+                  <button className={styles.buttonClose} onClick={closeModal}>
+                    <CrossIcon className={styles.icon} />
                   </button>
                 </div>
+              ) : null}
+              <div className={classNames(styles.content)}>{children}</div>
+              <div className={classNames(styles.buttonBlock)}>
+                <button
+                  className={styles.buttonYes}
+                  onClick={() => {
+                    confirmAction();
+                    if (closeModal) {
+                      closeModal();
+                    }
+                  }}
+                >
+                  Да
+                </button>
+                <button className={styles.buttonNo} onClick={cancelAction}>
+                  Нет
+                </button>
               </div>
-            </div>,
-            document.body
-          )
+            </div>
+          </div>,
+          document.body
+        )
         : null}
     </>
   );

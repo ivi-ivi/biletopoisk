@@ -1,9 +1,10 @@
 import styles from './input.module.css';
+import { ChangeEvent } from 'react';
 
 interface Props {
   placeholder: string;
   value: string;
-  onChange: (e) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input = (props: Props) => {

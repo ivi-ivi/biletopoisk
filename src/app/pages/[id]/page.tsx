@@ -6,7 +6,7 @@ import { Layout } from '../../layout/Layout';
 import { Reviews } from '../../components /Reviews/Reviews';
 import { Spinner } from '../../components /Spinner/Spinner';
 
-export default function Film({ params }: { params: { id: number } }) {
+export default function Film({ params }: { params: { id: string } }) {
   const { data, isLoading, error } = useGetMovieQuery(params.id);
 
   if (isLoading) {

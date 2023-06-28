@@ -10,11 +10,12 @@ import { Modal } from '../../components /Modal/Modal';
 import { useState } from 'react';
 import { cartActions } from '../../store/features/cart';
 import { Spinner } from '../../components /Spinner/Spinner';
+import { Film } from '../../page';
 
 export default function Cart() {
-  const amount = useSelector((state) => state.cart);
-  const { data, isLoading, error } = useGetMoviesQuery();
-  const [open, setOpen] = useState<string | null>();
+  const amount = useSelector((state: any) => state.cart);
+  const { data, isLoading, error } = useGetMoviesQuery('movies');
+  const [open, setOpen] = useState<string | null>(null);
   const dispatch = useDispatch();
 
   if (isLoading) {
@@ -31,7 +32,7 @@ export default function Cart() {
         <div className={styles.main}>
           {Object.values(amount).length ? (
             <>
-              {data.map((item) => {
+              {data.map((item: Film) => {
                 if (amount.hasOwnProperty(item.id))
                   return (
                     <FilmCard
@@ -50,7 +51,7 @@ export default function Cart() {
                 <span className={styles.title}>Итого билетов:</span>
                 <span className={styles.title}>
                   {Object.values(amount).reduce(
-                    (accumulator, currentValue) => accumulator + currentValue,
+                    (accumulator: number, currentValue: any) => accumulator + currentValue,
                     0
                   )}
                 </span>

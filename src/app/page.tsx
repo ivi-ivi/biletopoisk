@@ -8,15 +8,22 @@ import { useGetMoviesQuery } from './store/servises/movieApi';
 import { useEffect, useState } from 'react';
 import { Spinner } from './components /Spinner/Spinner';
 
+export interface Film {
+  id: string;
+  title: string;
+  genre: string;
+  posterUrl: string;
+}
+
 export default function Home() {
   const [name, setName] = useState('');
   const [genre, setGenre] = useState('');
 
-  const { data, isLoading, error } = useGetMoviesQuery();
-  const [filtered, setFiltered] = useState();
-  const [filteredName, setFilteredName] = useState();
-  const [filteredGenre, setFilteredGenre] = useState();
-  let timeoutId;
+  const { data, isLoading, error } = useGetMoviesQuery('movies');
+  const [filtered, setFiltered] = useState<Film[]>();
+  const [filteredName, setFilteredName] = useState<Film[]>();
+  const [filteredGenre, setFilteredGenre] = useState<Film[]>();
+  let timeoutId: NodeJS.Timeout;
 
   useEffect(() => {
     setFilteredName(data);
@@ -26,7 +33,7 @@ export default function Home() {
 
   useEffect(() => {
     if (genre || name) {
-      const common = filteredName?.reduce((arr, item) => {
+      const common = filteredName?.reduce((arr: Film[], item: Film) => {
         if (filteredGenre?.includes(item)) {
           arr.push(item);
         }
@@ -47,13 +54,14 @@ export default function Home() {
 
   useEffect(() => {
     if (genre !== '-') {
-      let tmp = data?.filter((item) => item.genre === genre);
+      let tmp = data?.filter((item: Film) => item.genre === genre);
       setFilteredGenre(tmp);
     } else setFilteredGenre(data);
   }, [genre]);
 
-  function debounce(func, delay) {
-    return function (...args) {
+  function debounce<T extends (...args: any[]) => void>(func: T, delay: number): (...args: Array<T>) => void {
+
+    return function debouncedFn(this: any, ...args: Array<T>): void {
       clearTimeout(timeoutId);
 
       timeoutId = setTimeout(() => {
@@ -61,6 +69,7 @@ export default function Home() {
       }, delay);
     };
   }
+
 
   if (isLoading) {
     return <Spinner />;
@@ -71,7 +80,7 @@ export default function Home() {
   }
 
   function filterByName(currName: string) {
-    let tmp = data?.filter((item) => item.title.toLowerCase().startsWith(currName));
+    let tmp = data?.filter((item: Film) => item.title.toLowerCase().startsWith(currName));
     setFilteredName(tmp);
   }
 
@@ -81,20 +90,20 @@ export default function Home() {
         <SearchFilter name={name} setName={setName} setGenre={setGenre} />
         <section className={styles.filmsList}>
           {!!filtered?.length &&
-            filtered.map((item) => {
-              return (
-                <FilmCard
-                  key={item.id}
-                  title={item.title}
-                  genre={item.genre}
-                  posterUrl={item.posterUrl}
-                  id={item.id}
-                />
-              );
-            })}
+          filtered.map((item) => {
+            return (
+              <FilmCard
+                key={item.id}
+                title={item.title}
+                genre={item.genre}
+                posterUrl={item.posterUrl}
+                id={item.id}
+              />
+            );
+          })}
         </section>
       </section>
-      <div id="select-root" />
+      <div id='select-root' />
     </Layout>
   );
 }
